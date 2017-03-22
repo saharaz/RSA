@@ -1,10 +1,11 @@
-
 from Tkinter import * 
 import tkMessageBox
 import tkFileDialog
 
+
 root = Tk()
 root.title("Encrypt/Decrypt")
+
 
 #e = 13
 #n = 56291
@@ -32,9 +33,10 @@ def encrypt_message():
             encrypt = pow(numerize, e, n)
             LUT_encryption[i] = unichr(encrypt) 
             encrypted_msg += unichr(encrypt)
+    
     clear_entry1()
     textbox1.insert(END, encrypted_msg)
-        
+    tkMessageBox.showinfo("Encrypted Message", "Your message has been encrypted!!")
 
 def decrypt_message(): 
     n = int(56291) 
@@ -51,6 +53,7 @@ def decrypt_message():
             decrypted_msg += unichr(decrypt)
     clear_entry2() 
     textbox2.insert(END, decrypted_msg) 
+    tkMessageBox.showinfo("Decrypted Message", "Your message has been decrypted!!")
     
 def clear_entry2():
     textbox2.delete(1.0, END) 
@@ -81,7 +84,8 @@ def save(self):
     total =str(text_box)
     f.write(total)
     f.close()
-    
+
+
 
 label1 = Label(root, text = "Encrypt", bg="yellow", anchor=W )
 label1.grid(row=0, column=0, sticky=EW, columnspan=5)
@@ -129,6 +133,9 @@ button1.grid(row=3, column=0)
 button2 = Button(root, text = "Decrypt", command = decrypt_message)
 button2.grid(row=3, column=5)
 
+
+
+
 menubar = Menu(root)
 filemenu =Menu(menubar, tearoff=0)
 filemenu.add_command(label="Open", command=file_open)
@@ -137,6 +144,7 @@ filemenu.add_command(label="Save", command=file_save)
 menubar.add_cascade(label="File", menu=filemenu)
 
 editmenu=Menu(menubar,tearoff=0)
+
 
 root.config(menu=menubar)
 
