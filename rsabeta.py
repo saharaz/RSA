@@ -69,21 +69,23 @@ def file_save():
     f.write(text2save)
     f.close() 
     
-def file_open():
-    f = tkFileDialog.askopenfile(mode='r', defaultextension=".txt")
-    if f is None: 
-        return
-    text2open = str(text.get(1.0, END)) 
-    f.write(text2open)
-    f.close() 
-
-def save(self):
-    text_box= self.toal
-    print text_box
-    f= open ("ReadMe.txt.", "w")
-    total =str(text_box)
-    f.write(total)
+def open_fileQ():
+    tj=open("decrypt.txt.", 'r')
+    textbox1.insert(END,tj.read())
+    tj.close()
+    
+def openfileR():
+    print "success"
+    f= open("decrypt.txt.", 'w')
+    inputs = textbox1.get(1.0, END)
+    f.write(inputs)
     f.close()
+    
+    
+def help(): 
+    tkMessageBox.showinfo("Instructions", "Put your messsage into the box below, along with your public key. Press encrypt to encrypt your message. In order to decrypt your message, paste the message in the box on the left and click decrypt.")
+def close():
+    root.destroy()
 
 
 
@@ -138,10 +140,16 @@ button2.grid(row=3, column=5)
 
 menubar = Menu(root)
 filemenu =Menu(menubar, tearoff=0)
-filemenu.add_command(label="Open", command=file_open)
+filemenu.add_command(label="Open", command=open_fileQ)
+filemenu.add_command(label="Save", command=openfileR)
 filemenu.add_separator()
-filemenu.add_command(label="Save", command=file_save)
+filemenu.add_command(label="Close", command=close)
 menubar.add_cascade(label="File", menu=filemenu)
+
+helpmenu = Menu(menubar, tearoff=0)
+helpmenu.add_command(label="Help", command=help)
+menubar.add_cascade(label="Help", menu=helpmenu)
+
 
 editmenu=Menu(menubar,tearoff=0)
 
